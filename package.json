@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Elephly/W3DL/issues"
   },
-  "homepage": "https://elephly.github.io/W3DL/index.html"
+  "homepage": "https://elephly.github.io/W3DL/index.html",
+  "dependencies": {
+    "rimraf": "^2.5.3"
+  }
 }
