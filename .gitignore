@@ -77,3 +77,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# =========================
+# W3DL
+# =========================
+
+# Documentation
+W3DDOC
