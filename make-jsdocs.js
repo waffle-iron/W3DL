@@ -16,5 +16,5 @@ var output = function (error, stdout, stderr) {
 if (process.argv[2] === "clean") {
   rimraf("W3DDOC", output);
 } else {
-  exec("jsdoc -r -d W3DDOC -R README.md src", output);
+  exec("node_modules/.bin/jsdoc -r -d W3DDOC -R README.md src", output);
 }
