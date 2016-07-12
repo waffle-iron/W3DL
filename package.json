@@ -17,6 +17,7 @@
   },
   "homepage": "https://elephly.github.io/W3DL/index.html",
   "dependencies": {
+    "jsdoc": "^3.4.0",
     "rimraf": "^2.5.3"
   }
 }

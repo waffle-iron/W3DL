@@ -1,5 +1,9 @@
 // jshint esversion: 6
 
+/**
+ * @class
+ * @abstract
+ */
 class Matrix {
   constructor() {
     if (new.target === Matrix) {
@@ -109,6 +113,10 @@ class Matrix {
   }
 }
 
+/**
+ * @class
+ * @extends Matrix
+ */
 class Matrix4 extends Matrix {
   constructor(vector1 = new Vector4D(0, 0, 0, 0), vector2 = new Vector4D(0, 0, 0, 0), vector3 = new Vector4D(0, 0, 0, 0), vector4 = new Vector4D(0, 0, 0, 0)) {
     ValidateArguments([Vector4D, Vector4D, Vector4D, Vector4D], arguments, 0);

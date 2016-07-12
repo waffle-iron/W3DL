@@ -1,5 +1,9 @@
 // jshint esversion: 6
 
+/**
+ * @class
+ * @abstract
+ */
 class Vector {
   constructor() {
     if (new.target === Vector) {
@@ -41,6 +45,10 @@ class Vector {
   }
 }
 
+/**
+ * @class
+ * @extends Vector
+ */
 class Vector2D extends Vector {
   constructor(x = 0.0, y = 0.0) {
     ValidateArguments([Number, Number], arguments, 0);
@@ -87,6 +95,10 @@ class Vector2D extends Vector {
   }
 }
 
+/**
+ * @class
+ * @extends Vector
+ */
 class Vector3D extends Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0) {
     ValidateArguments([Number, Number, Number], arguments, 0);
@@ -139,6 +151,10 @@ class Vector3D extends Vector {
   }
 }
 
+/**
+ * @class
+ * @extends Vector
+ */
 class Vector4D extends Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0, w = 1.0) {
     ValidateArguments([Number, Number, Number, Number], arguments, 0);

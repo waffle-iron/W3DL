@@ -65,11 +65,9 @@ class ColorRGBA {
 /**
  * A class to hold various instances of well known colors for easy retrieval.
  * @class
+ * @abstract
  */
 class Colors {
-  /**
-   * <strong>Cannot be instantiated.</strong>
-   */
   constructor() {
     if (new.target === Colors) {
       throw new TypeError("Cannot construct instances of abstract class: " + new.target);

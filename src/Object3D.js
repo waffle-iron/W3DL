@@ -1,5 +1,8 @@
 // jshint esversion: 6
 
+/**
+ * @class
+ */
 class Object3D {
   constructor(initialPosition = new Vector3D(), initialScale = new Vector3D(1, 1, 1), initialRotation = new Vector3D()) {
     ValidateArguments([Vector3D, Vector3D, Vector3D], arguments, 0);
