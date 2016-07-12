@@ -1,6 +1,14 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @requires {@link Color.js}
+ * @requires {@link Vector.js}
+ * @see Vertex
+ */
+
+/**
  * A class to represent a vertex in space. Vertices hold information about their
  * location, their color, their texture coordinate mapping, and their normal in
  * 3D space.

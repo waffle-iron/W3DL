@@ -1,6 +1,13 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @requires {@link Utils.js}
+ * @see W3DMath
+ */
+
+/**
  * Common math functions to be used globally.
  * @namespace
  */

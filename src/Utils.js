@@ -1,6 +1,12 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @see W3DUtils
+ */
+
+/**
  * Common utility functions and objects to be used globally.
  * @namespace
  */

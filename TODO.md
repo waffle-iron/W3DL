@@ -21,7 +21,7 @@
 - [x] MyMath.h -> `Math.js`
 - [x] MyMatrix.h -> `Matrix.js`
 - [ ] MyMeshFactory.h
-- [ ] MyObject3D.h
+- [x] MyObject3D.h -> `Object3D.js`
 - [ ] MyObjectManager.h
 - [ ] ~~MyQuad.h~~
 - [ ] MyShaderManager.h
@@ -55,7 +55,7 @@
 - [x] MyMath.cpp -> `Math.js`
 - [x] MyMatrix.cpp -> `Matrix.js`
 - [ ] MyMeshFactory.cpp
-- [ ] MyObject3D.cpp
+- [x] MyObject3D.cpp -> `Object3D.js`
 - [ ] ~~MyQuad.cpp~~
 - [ ] MyShaderManager.cpp
 - [ ] MyShaderProgram.cpp

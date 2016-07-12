@@ -1,6 +1,14 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @requires {@link Utils.js}
+ * @see ColorRGBA
+ * @see Colors
+ */
+
+/**
  * A class to represent color objects using red, green, blue, and alpha color
  * channels.
  * @class

@@ -1,6 +1,16 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @requires {@link Math.js}
+ * @requires {@link Vector.js}
+ * @see Matrix
+ * @see Matrix4
+ */
+
+/**
+ * @todo Documentation.
  * @class
  * @abstract
  */
@@ -114,6 +124,7 @@ class Matrix {
 }
 
 /**
+ * @todo Documentation.
  * @class
  * @extends Matrix
  */

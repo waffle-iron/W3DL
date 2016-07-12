@@ -1,6 +1,17 @@
 // jshint esversion: 6
 
 /**
+ * @todo Documentation.
+ * @file
+ * @requires {@link Utils.js}
+ * @see Vector
+ * @see Vector2D
+ * @see Vector3D
+ * @see Vector4D
+ */
+
+/**
+ * @todo Documentation.
  * @class
  * @abstract
  */
@@ -46,6 +57,7 @@ class Vector {
 }
 
 /**
+ * @todo Documentation.
  * @class
  * @extends Vector
  */
@@ -96,6 +108,7 @@ class Vector2D extends Vector {
 }
 
 /**
+ * @todo Documentation.
  * @class
  * @extends Vector
  */
@@ -152,6 +165,7 @@ class Vector3D extends Vector {
 }
 
 /**
+ * @todo Documentation.
  * @class
  * @extends Vector
  */
