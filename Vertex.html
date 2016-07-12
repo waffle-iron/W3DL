@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ColorRGBA</title>
+    <title>JSDoc: Class: Vertex</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ColorRGBA</h1>
+    <h1 class="page-title">Class: Vertex</h1>
 
     
 
@@ -28,10 +28,11 @@
 
 <header>
     
-        <h2>ColorRGBA</h2>
+        <h2>Vertex</h2>
         
-            <div class="class-description">A class to represent color objects using red, green, blue, and alpha color
-channels.</div>
+            <div class="class-description">A class to represent a vertex in space. Vertices hold information about their
+location, their color, their texture coordinate mapping, and their normal in
+3D space.</div>
         
     
 </header>
@@ -45,7 +46,7 @@ channels.</div>
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="ColorRGBA"><span class="type-signature"></span>new ColorRGBA<span class="signature">(red<span class="signature-attributes">opt</span>, green<span class="signature-attributes">opt</span>, blue<span class="signature-attributes">opt</span>, alpha<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Vertex"><span class="type-signature"></span>new Vertex<span class="signature">(position, color<span class="signature-attributes">opt</span>, texture<span class="signature-attributes">opt</span>, normal<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
 
     
 
@@ -88,13 +89,13 @@ channels.</div>
 
         <tr>
             
-                <td class="name"><code>red</code></td>
+                <td class="name"><code>position</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector.html">Vector</a></span>
 
 
             
@@ -102,8 +103,6 @@ channels.</div>
 
             
                 <td class="attributes">
-                
-                    &lt;optional><br>
                 
 
                 
@@ -115,26 +114,24 @@ channels.</div>
             
                 <td class="default">
                 
-                    0.0
-                
                 </td>
             
 
-            <td class="description last">A quantity from 0.0 to 1.0 for the color's red
-                               channel.</td>
+            <td class="description last">A vector representing the spacial position of the
+            vertex.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>green</code></td>
+                <td class="name"><code>color</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="ColorRGBA.html">ColorRGBA</a></span>
 
 
             
@@ -155,26 +152,26 @@ channels.</div>
             
                 <td class="default">
                 
-                    0.0
+                    new ColorRGBA()
                 
                 </td>
             
 
-            <td class="description last">A quantity from 0.0 to 1.0 for the color's
-                                 green channel.</td>
+            <td class="description last">A color attribute for the
+            vertex.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>blue</code></td>
+                <td class="name"><code>texture</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector2D.html">Vector2D</a></span>
 
 
             
@@ -195,26 +192,26 @@ channels.</div>
             
                 <td class="default">
                 
-                    0.0
+                    new Vector2D()
                 
                 </td>
             
 
-            <td class="description last">A quantity from 0.0 to 1.0 for the color's blue
-                                channel.</td>
+            <td class="description last">A vector mapping to
+            coordinates on a 2D texture.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>alpha</code></td>
+                <td class="name"><code>normal</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector4D.html">Vector4D</a></span>
 
 
             
@@ -235,13 +232,13 @@ channels.</div>
             
                 <td class="default">
                 
-                    1.0
+                    new Vector4D()
                 
                 </td>
             
 
-            <td class="description last">A quantity from 0.0 to 1.0 representing the
-                                 color's transparency.</td>
+            <td class="description last">A vector representing the normal
+            to the surface upon which the vertex is found.</td>
         </tr>
 
     
@@ -282,7 +279,7 @@ channels.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line8">line 8</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -326,13 +323,13 @@ channels.</div>
 
         
             
-<h4 class="name" id="alpha"><span class="type-signature"></span>alpha<span class="type-signature"> :Number</span></h4>
+<h4 class="name" id="color"><span class="type-signature"></span>color<span class="type-signature"> :<a href="ColorRGBA.html">ColorRGBA</a></span></h4>
 
 
 
 
 <div class="description">
-    A quantity from 0.0 to 1.0 representing the color's transparency.
+    A color attribute for the vertex.
 </div>
 
 
@@ -341,7 +338,7 @@ channels.</div>
     <ul>
         <li>
             
-<span class="param-type">Number</span>
+<span class="param-type"><a href="ColorRGBA.html">ColorRGBA</a></span>
 
 
         </li>
@@ -380,7 +377,7 @@ channels.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line44">line 44</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -398,13 +395,14 @@ channels.</div>
 
         
             
-<h4 class="name" id="blue"><span class="type-signature"></span>blue<span class="type-signature"> :Number</span></h4>
+<h4 class="name" id="normal"><span class="type-signature"></span>normal<span class="type-signature"> :<a href="Vector4D.html">Vector4D</a></span></h4>
 
 
 
 
 <div class="description">
-    A quantity from 0.0 to 1.0 for the color's blue channel.
+    A vector representing the normal to the surface upon which the vertex is
+found.
 </div>
 
 
@@ -413,7 +411,7 @@ channels.</div>
     <ul>
         <li>
             
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector4D.html">Vector4D</a></span>
 
 
         </li>
@@ -452,7 +450,7 @@ channels.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line38">line 38</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -470,13 +468,13 @@ channels.</div>
 
         
             
-<h4 class="name" id="green"><span class="type-signature"></span>green<span class="type-signature"> :Number</span></h4>
+<h4 class="name" id="position"><span class="type-signature"></span>position<span class="type-signature"> :<a href="Vector.html">Vector</a></span></h4>
 
 
 
 
 <div class="description">
-    A quantity from 0.0 to 1.0 for the color's green channel.
+    A vector representing the spacial position of the vertex.
 </div>
 
 
@@ -485,7 +483,7 @@ channels.</div>
     <ul>
         <li>
             
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector.html">Vector</a></span>
 
 
         </li>
@@ -524,7 +522,7 @@ channels.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line32">line 32</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -542,13 +540,13 @@ channels.</div>
 
         
             
-<h4 class="name" id="red"><span class="type-signature"></span>red<span class="type-signature"> :Number</span></h4>
+<h4 class="name" id="texture"><span class="type-signature"></span>texture<span class="type-signature"> :<a href="Vector2D.html">Vector2D</a></span></h4>
 
 
 
 
 <div class="description">
-    A quantity from 0.0 to 1.0 for the color's red channel.
+    A vector mapping to coordinates on a 2D texture.
 </div>
 
 
@@ -557,7 +555,7 @@ channels.</div>
     <ul>
         <li>
             
-<span class="param-type">Number</span>
+<span class="param-type"><a href="Vector2D.html">Vector2D</a></span>
 
 
         </li>
@@ -596,7 +594,7 @@ channels.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line26">line 26</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -620,8 +618,9 @@ channels.</div>
 
 
 <div class="description">
-    Returns the color object converted into an array with values for red,
-green, blue, and alpha at indices 0, 1, 2, and 3, respectively.
+    Returns the vertex object converted into an array with values for position,
+color, texture coordinates, and normal, all converted into arrays and
+concatenated together.
 </div>
 
 
@@ -669,7 +668,7 @@ green, blue, and alpha at indices 0, 1, 2, and 3, respectively.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line52">line 52</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -693,7 +692,7 @@ green, blue, and alpha at indices 0, 1, 2, and 3, respectively.
 
 
 <div class="description">
-    Returns ColorRGBA.toArray converted into a Float32Array.
+    Returns Vertex.toArray converted into a Float32Array.
 </div>
 
 
@@ -741,7 +740,7 @@ green, blue, and alpha at indices 0, 1, 2, and 3, respectively.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Color.js.html">Color.js</a>, <a href="Color.js.html#line60">line 60</a>
+        <a href="Vertex.js.html">Vertex.js</a>, <a href="Vertex.js.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -781,7 +780,7 @@ green, blue, and alpha at indices 0, 1, 2, and 3, respectively.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 11 2016 20:41:18 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 11 2016 20:41:19 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
