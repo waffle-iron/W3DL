@@ -62,7 +62,7 @@ class Matrix {
   }
 
   add(other) {
-    ValidateArguments([this.constructor], arguments);
+    W3DUtils.ValidateArguments([this.constructor], arguments);
     var matrix = new this.constructor();
     for (var i = 0; i < matrix.entries.length; i++) {
       for (var j = 0; j < matrix.entries[i].length; j++) {
@@ -73,7 +73,7 @@ class Matrix {
   }
 
   subtract(other) {
-    ValidateArguments([this.constructor], arguments);
+    W3DUtils.ValidateArguments([this.constructor], arguments);
     var matrix = new this.constructor();
     for (var i = 0; i < matrix.entries.length; i++) {
       for (var j = 0; j < matrix.entries[i].length; j++) {
@@ -84,7 +84,7 @@ class Matrix {
   }
 
   multiply(multiplier) {
-    ValidateArguments([[Number, Matrix, Vector]], arguments);
+    W3DUtils.ValidateArguments([[Number, Matrix, Vector]], arguments);
     var product = null;
     if (new multiplier.constructor() instanceof Number) {
       product = new this.constructor();
@@ -119,7 +119,7 @@ class Matrix {
  */
 class Matrix4 extends Matrix {
   constructor(vector1 = new Vector4D(0, 0, 0, 0), vector2 = new Vector4D(0, 0, 0, 0), vector3 = new Vector4D(0, 0, 0, 0), vector4 = new Vector4D(0, 0, 0, 0)) {
-    ValidateArguments([Vector4D, Vector4D, Vector4D, Vector4D], arguments, 0);
+    W3DUtils.ValidateArguments([Vector4D, Vector4D, Vector4D, Vector4D], arguments, 0);
     super();
     this.entries = [vector1.toArray, vector2.toArray, vector3.toArray, vector4.toArray];
   }
@@ -133,8 +133,8 @@ class Matrix4 extends Matrix {
   where a = angle.
   */
   static RotationAboutXMatrix(angle, isDegree = true) {
-    ValidateArguments([Number, Boolean], arguments, 1);
-    var a = (isDegree ? DegreeToRadian(angle) : angle);
+    W3DUtils.ValidateArguments([Number, Boolean], arguments, 1);
+    var a = (isDegree ? W3DMath.DegreeToRadian(angle) : angle);
 
     var matrix = Matrix4.IdentityMatrix();
     matrix.entries[1][1] = matrix.entries[2][2] = Math.cos(a);
@@ -152,8 +152,8 @@ class Matrix4 extends Matrix {
   where a = angle.
   */
   static RotationAboutYMatrix(angle, isDegree = true) {
-    ValidateArguments([Number, Boolean], arguments, 1);
-    var a = (isDegree ? DegreeToRadian(angle) : angle);
+    W3DUtils.ValidateArguments([Number, Boolean], arguments, 1);
+    var a = (isDegree ? W3DMath.DegreeToRadian(angle) : angle);
 
     var matrix = Matrix4.IdentityMatrix();
     matrix.entries[0][0] = matrix.entries[2][2] = Math.cos(a);
@@ -171,8 +171,8 @@ class Matrix4 extends Matrix {
   where a = angle.
   */
   static RotationAboutZMatrix(angle, isDegree = true) {
-    ValidateArguments([Number, Boolean], arguments, 1);
-    var a = (isDegree ? DegreeToRadian(angle) : angle);
+    W3DUtils.ValidateArguments([Number, Boolean], arguments, 1);
+    var a = (isDegree ? W3DMath.DegreeToRadian(angle) : angle);
 
     var matrix = Matrix4.IdentityMatrix();
     matrix.entries[0][0] = matrix.entries[1][1] = Math.cos(a);
@@ -182,13 +182,13 @@ class Matrix4 extends Matrix {
   }
 
   static RollPitchYawRotationMatrix(roll, pitch, yaw, isDegree = true) {
-    ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
+    W3DUtils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
     return (RotationAboutYMatrix(yaw, isDegree) * RotationAboutXMatrix(pitch, isDegree) * RotationAboutZMatrix(roll, isDegree));
   }
 
   static RotationAboutVectorAxisMatrix(vector, angle, isDegree = true) {
-    ValidateArguments([[Vector3D, Vector4D], Number, Boolean], arguments, 2);
-    var a = (isDegree ? DegreeToRadian(angle) : angle);
+    W3DUtils.ValidateArguments([[Vector3D, Vector4D], Number, Boolean], arguments, 2);
+    var a = (isDegree ? W3DMath.DegreeToRadian(angle) : angle);
     var v = vector.normalized();
 
     var x = v.x;
@@ -204,22 +204,22 @@ class Matrix4 extends Matrix {
   }
 
   static ScaleMatrix(x, y, z) {
-    ValidateArguments([Number, Number, Number], arguments);
+    W3DUtils.ValidateArguments([Number, Number, Number], arguments);
     return new Matrix4(new Vector4D(x, 0, 0, 0), new Vector4D(0, y, 0, 0), new Vector4D(0, 0, z, 0), new Vector4D());
   }
 
   static TranslationMatrix(x, y, z) {
-    ValidateArguments([Number, Number, Number], arguments);
+    W3DUtils.ValidateArguments([Number, Number, Number], arguments);
     return new Matrix4(new Vector4D(1, 0, 0, x), new Vector4D(0, 1, 0, y), new Vector4D(0, 0, 1, z), new Vector4D());
   }
 
   static TranslationFromVectorMatrix(vector) {
-    ValidateArguments([[Vector3D, Vector4D]], arguments);
+    W3DUtils.ValidateArguments([[Vector3D, Vector4D]], arguments);
     return TranslationMatrix(vector.x, vector.y, vector.z);
   }
 
   static CameraMatrix(position, lookAt, upVector) {
-    ValidateArguments([[Vector3D, Vector4D], [Vector3D, Vector4D], [Vector3D, Vector4D]], arguments);
+    W3DUtils.ValidateArguments([[Vector3D, Vector4D], [Vector3D, Vector4D], [Vector3D, Vector4D]], arguments);
     var pos = (position instanceof Vector3D ? position : new Vector3D(position.x, position.y, position.z));
     var look = (lookAt instanceof Vector3D ? lookAt : new Vector3D(lookAt.x, lookAt.y, lookAt.z));
     var up = (upVector instanceof Vector3D ? upVector : new Vector3D(upVector.x, upVector.y, upVector.z));
@@ -236,14 +236,14 @@ class Matrix4 extends Matrix {
   }
 
   static FrustrumProjetionMatrix(xMin, yMin, xMax, yMax, nearPlane, farPlane) {
-    ValidateArguments([Number, Number, Number, Number, Number, Number], arguments);
+    W3DUtils.ValidateArguments([Number, Number, Number, Number, Number, Number], arguments);
     throw new Error("Unimplemented");
   }
 
   static SymmetricPerspectiveProjectionMatrix(fieldOfView, aspectRatio, nearPlane, farPlane) {
-    ValidateArguments([Number, Number, Number, Number], arguments);
+    W3DUtils.ValidateArguments([Number, Number, Number, Number], arguments);
     var matrix = Matrix4.IdentityMatrix();
-    var cot = 1 / Math.tan(DegreeToRadian(fieldOfView / 2));
+    var cot = 1 / Math.tan(W3DMath.DegreeToRadian(fieldOfView / 2));
     matrix.entries[0][0] = cot / aspectRatio;
     matrix.entries[1][1] = cot;
     matrix.entries[2][2] = (nearPlane + farPlane) / (nearPlane - farPlane);
@@ -254,7 +254,7 @@ class Matrix4 extends Matrix {
   }
 
   matrixMultiply(other) {
-    ValidateArguments([Matrix4], arguments);
+    W3DUtils.ValidateArguments([Matrix4], arguments);
     var matrix = new Matrix4();
     var otherMatrix = other.transposed();
     for (var i = 0; i < 4; i++) {
@@ -268,7 +268,7 @@ class Matrix4 extends Matrix {
   }
 
   vectorMultiply(vector) {
-    ValidateArguments([Vector4D], arguments);
+    W3DUtils.ValidateArguments([Vector4D], arguments);
     var rows = [
       new Vector4D(this.entries[0][0], this.entries[0][1], this.entries[0][2], this.entries[0][3]),
       new Vector4D(this.entries[1][0], this.entries[1][1], this.entries[1][2], this.entries[1][3]),

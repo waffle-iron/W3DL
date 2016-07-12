@@ -18,7 +18,7 @@ class Vertex {
             to the surface upon which the vertex is found.
    */
   constructor(position, color = new ColorRGBA(), texture = new Vector2D(), normal = new Vector4D()) {
-    ValidateArguments([Vector, ColorRGBA, Vector2D, Vector4D], arguments, 1);
+    W3DUtils.ValidateArguments([Vector, ColorRGBA, Vector2D, Vector4D], arguments, 1);
 
     /**
      * A vector representing the spacial position of the vertex.

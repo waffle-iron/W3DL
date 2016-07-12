@@ -8,16 +8,16 @@
 class ColorRGBA {
   /**
    * @param {Number} [red=0.0] A quantity from 0.0 to 1.0 for the color's red
-                               channel.
+            channel.
    * @param {Number} [green=0.0] A quantity from 0.0 to 1.0 for the color's
-                                 green channel.
+            green channel.
    * @param {Number} [blue=0.0] A quantity from 0.0 to 1.0 for the color's blue
-                                channel.
+            channel.
    * @param {Number} [alpha=1.0] A quantity from 0.0 to 1.0 representing the
-                                 color's transparency.
+            color's transparency.
    */
   constructor(red = 0.0, green = 0.0, blue = 0.0, alpha = 1.0) {
-    ValidateArguments([Number, Number, Number, Number], arguments, 0);
+    W3DUtils.ValidateArguments([Number, Number, Number, Number], arguments, 0);
 
     /**
      * A quantity from 0.0 to 1.0 for the color's red channel.

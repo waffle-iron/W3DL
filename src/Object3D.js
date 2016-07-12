@@ -5,7 +5,7 @@
  */
 class Object3D {
   constructor(initialPosition = new Vector3D(), initialScale = new Vector3D(1, 1, 1), initialRotation = new Vector3D()) {
-    ValidateArguments([Vector3D, Vector3D, Vector3D], arguments, 0);
+    W3DUtils.ValidateArguments([Vector3D, Vector3D, Vector3D], arguments, 0);
     this.position = initialPosition;
     this.scale = initialScale;
     this.rotation = initialRotation;
@@ -14,14 +14,14 @@ class Object3D {
   }
 
   update(deltaTime) {
-    ValidateArguments([Number], arguments);
+    W3DUtils.ValidateArguments([Number], arguments);
     this.children.forEach(function(child) {
       child.update(deltaTime);
     });
   }
 
   draw(parentTransformation = MyMatrix4.IdentityMatrix()) {
-    ValidateArguments([Matrix4], arguments, 0);
+    W3DUtils.ValidateArguments([Matrix4], arguments, 0);
     // Scale is not passed onto children
     transformation = parentTransformation.multiply(Matrix4.TranslationMatrix(this.position)).
       multiply(Matrix4.RollPitchYawRotationMatrix(this.rotation.z, this.rotation.x, this.rotation.y));
