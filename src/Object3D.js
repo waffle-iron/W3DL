@@ -28,17 +28,17 @@ class Object3D {
     });
   }
 
-  draw(parentTransformation = MyMatrix4.IdentityMatrix()) {
+  draw(parentTransformation = Matrix4.IdentityMatrix()) {
     W3DUtils.ValidateArguments([Matrix4], arguments, 0);
     // Scale is not passed onto children
-    transformation = parentTransformation.multiply(Matrix4.TranslationMatrix(this.position)).
+    this.transformation = parentTransformation.multiply(Matrix4.TranslationMatrix(this.position.x, this.position.y, this.position.z)).
       multiply(Matrix4.RollPitchYawRotationMatrix(this.rotation.z, this.rotation.x, this.rotation.y));
 
       this.children.forEach(function(child) {
-        child.draw(transformation);
+        child.draw(this.transformation);
       });
 
-    transformation = transformation.multiply(Matrix4.ScaleMatrix(this.scale.x, this.scale.y, this.scale.z));
+    this.transformation = this.transformation.multiply(Matrix4.ScaleMatrix(this.scale.x, this.scale.y, this.scale.z));
   }
 
   rotate(x, y, z, isDegree = true) {

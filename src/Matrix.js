@@ -194,7 +194,9 @@ class Matrix4 extends Matrix {
 
   static RollPitchYawRotationMatrix(roll, pitch, yaw, isDegree = true) {
     W3DUtils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
-    return (RotationAboutYMatrix(yaw, isDegree) * RotationAboutXMatrix(pitch, isDegree) * RotationAboutZMatrix(roll, isDegree));
+    return (this.RotationAboutYMatrix(yaw, isDegree).matrixMultiply(
+      this.RotationAboutXMatrix(pitch, isDegree)).matrixMultiply(
+        this.RotationAboutZMatrix(roll, isDegree)));
   }
 
   static RotationAboutVectorAxisMatrix(vector, angle, isDegree = true) {
@@ -248,7 +250,7 @@ class Matrix4 extends Matrix {
 
   static FrustrumProjetionMatrix(xMin, yMin, xMax, yMax, nearPlane, farPlane) {
     W3DUtils.ValidateArguments([Number, Number, Number, Number, Number, Number], arguments);
-    throw new Error("Unimplemented");
+    throw new Error("Unimplemented.");
   }
 
   static SymmetricPerspectiveProjectionMatrix(fieldOfView, aspectRatio, nearPlane, farPlane) {
