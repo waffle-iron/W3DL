@@ -39,34 +39,34 @@ if (build) {
     if (err) {
       fs.mkdirSync("bin");
     }
+    exec("node_modules" + delim + ".bin" + delim + "uglifyjs " +
+      "-o bin" + delim + "w3dl.min.js " +
+      //"--source-map bin" + delim + "w3dl.min.js.map " +
+      "--compress " +
+      "--mangle " +
+      defines +
+      "-- " +
+      "shaders" + delim + "color-fragment.js " +
+      "shaders" + delim + "color-vertex.js " +
+      "shaders" + delim + "gouraud-fragment.js " +
+      "shaders" + delim + "gouraud-vertex.js " +
+      "shaders" + delim + "phong-fragment.js " +
+      "shaders" + delim + "phong-vertex.js " +
+      "shaders" + delim + "texture-fragment.js " +
+      "shaders" + delim + "texture-vertex.js " +
+      "shaders" + delim + "white-vertex.js " +
+      "src" + delim + "Utils.js " +
+      "src" + delim + "Math.js " +
+      "src" + delim + "Color.js " +
+      "src" + delim + "Vector.js " +
+      "src" + delim + "Matrix.js " +
+      "src" + delim + "Vertex.js " +
+      "src" + delim + "IndexedVertexArray.js " +
+      "src" + delim + "ShaderProgram.js " +
+      "src" + delim + "Texture2D.js " +
+      "src" + delim + "Material.js " +
+      "src" + delim + "Object3D.js " +
+      "src" + delim + "GraphicsObject3D.js ",
+      output);
   });
-  exec("node_modules" + delim + ".bin" + delim + "uglifyjs " +
-    "-o bin" + delim + "w3dl.min.js " +
-    //"--source-map bin" + delim + "w3dl.min.js.map " +
-    "--compress " +
-    "--mangle " +
-    defines +
-    "-- " +
-    "shaders" + delim + "color-fragment.js " +
-    "shaders" + delim + "color-vertex.js " +
-    "shaders" + delim + "gouraud-fragment.js " +
-    "shaders" + delim + "gouraud-vertex.js " +
-    "shaders" + delim + "phong-fragment.js " +
-    "shaders" + delim + "phong-vertex.js " +
-    "shaders" + delim + "texture-fragment.js " +
-    "shaders" + delim + "texture-vertex.js " +
-    "shaders" + delim + "white-vertex.js " +
-    "src" + delim + "Utils.js " +
-    "src" + delim + "Math.js " +
-    "src" + delim + "Color.js " +
-    "src" + delim + "Vector.js " +
-    "src" + delim + "Matrix.js " +
-    "src" + delim + "Vertex.js " +
-    "src" + delim + "IndexedVertexArray.js " +
-    "src" + delim + "ShaderProgram.js " +
-    "src" + delim + "Texture2D.js " +
-    "src" + delim + "Material.js " +
-    "src" + delim + "Object3D.js " +
-    "src" + delim + "GraphicsObject3D.js ",
-    output);
 }
