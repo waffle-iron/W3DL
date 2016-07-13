@@ -5,3 +5,13 @@
  * @file
  * @requires {@link Vertex.js}
  */
+
+/**
+ * @todo Documentation.
+ * @class
+ */
+class IndexedVertexArray {
+  constructor() {
+
+  }
+}
