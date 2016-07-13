@@ -82,5 +82,8 @@ $RECYCLE.BIN/
 # W3DL
 # =========================
 
+# Binaries
+bin
+
 # Documentation
 W3DDOC
