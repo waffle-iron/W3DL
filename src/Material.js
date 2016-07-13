@@ -6,3 +6,13 @@
  * @requires {@link Color.js}
  * @requires {@link Texture2D.js}
  */
+
+/**
+ * @todo Documentation.
+ * @class
+ */
+class Material {
+  constructor() {
+    
+  }
+}

@@ -5,3 +5,13 @@
  * @file
  * @requires {@link Matrix.js}
  */
+
+/**
+ * @todo Documentation.
+ * @class
+ */
+class ShaderProgram {
+  constructor() {
+    
+  }
+}
