@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: W3DL.js</title>
+    <title>JSDoc: Source: W3DLModule.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: W3DL.js</h1>
+    <h1 class="page-title">Source: W3DLModule.js</h1>
 
     
 
@@ -29,17 +29,13 @@
             <pre class="prettyprint source linenums"><code>// jshint esversion: 6
 
 /**
- * This file defines the W3DL namespace so that the entire W3DL API may be
- * encapsulated within one object.
+ * This file exports the W3DL namespace object as a node module. This file is
+ * assumed to be the final file in the W3DL API that is loaded or minified.
  * @file
- * @see W3DL
+ * @requires {@link W3DL.js}
  */
 
-/**
- * The namespace to encapsulate the entire W3DL API.
- * @namespace
- */
-var W3DL = {};
+module.exports = W3DL;
 </code></pre>
         </article>
     </section>
