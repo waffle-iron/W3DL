@@ -3,6 +3,7 @@
 /**
  * @todo Documentation.
  * @file
+ * @requires {@link W3DL.js}
  * @see W3DL.Utils
  */
 

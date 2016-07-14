@@ -207,8 +207,8 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
     var x = v.x;
     var y = v.y;
     var z = v.z;
-    var c = cos(a);
-    var s = sin(a);
+    var c = Math.cos(a);
+    var s = Math.sin(a);
 
     return new W3DL.Matrix4(new W3DL.Vector4D(c + (x * x * (1 - c)), (x * y * (1 - c)) - (z * s), (x * z * (1 - c)) + (y * s), 0),
       new W3DL.Vector4D((x * y * (1 - c)) + (z * s), c + (y * y * (1 - c)), (y * z * (1 - c)) - (x * s), 0),
@@ -228,7 +228,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
 
   static TranslationFromVectorMatrix(vector) {
     W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
-    return TranslationMatrix(vector.x, vector.y, vector.z);
+    return W3DL.Matrix4.TranslationMatrix(vector.x, vector.y, vector.z);
   }
 
   static CameraMatrix(position, lookAt, upVector) {
