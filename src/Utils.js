@@ -3,14 +3,14 @@
 /**
  * @todo Documentation.
  * @file
- * @see W3DUtils
+ * @see W3DL.Utils
  */
 
 /**
  * Common utility functions and objects to be used globally.
  * @namespace
  */
-var W3DUtils = {
+W3DL.Utils = {
   /**
    * Checks that an input parameter is an instance of an input type.
    * @param {function} type The function prototype to compare the argument with.
@@ -69,7 +69,7 @@ var W3DUtils = {
     // Define local callback for Array.prototype.find for the loop body in case
     // we have a multi type allowance for an agrument.
     var argCheck = function(type) {
-      return W3DUtils.CheckArgAgainstType(type, this);
+      return W3DL.Utils.CheckArgAgainstType(type, this);
     };
 
     // Define local callback for Array.prototype.map to get all of the type names
@@ -95,7 +95,7 @@ var W3DUtils = {
           throw new TypeError("Invalid parameter " + i + ": expected one of [" + typenames + "] but got " + args[i].constructor.name);
         }
       } else {
-        if (W3DUtils.CheckArgAgainstType(types[i], args[i]) === undefined) {
+        if (W3DL.Utils.CheckArgAgainstType(types[i], args[i]) === undefined) {
           throw new TypeError("Invalid parameter " + i + ": expected " + types[i].name + " but got " + args[i].constructor.name);
         }
       }

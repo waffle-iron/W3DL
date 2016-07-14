@@ -4,10 +4,10 @@
  * @todo Documentation.
  * @file
  * @requires {@link Utils.js}
- * @see Vector
- * @see Vector2D
- * @see Vector3D
- * @see Vector4D
+ * @see W3DL.Vector
+ * @see W3DL.Vector2D
+ * @see W3DL.Vector3D
+ * @see W3DL.Vector4D
  */
 
 /**
@@ -15,9 +15,9 @@
  * @class
  * @abstract
  */
-class Vector {
+W3DL.Vector = class Vector {
   constructor() {
-    if (new.target === Vector) {
+    if (new.target === W3DL.Vector) {
       throw new TypeError("Cannot construct instances of abstract class: " + new.target);
     }
     if (this.length === undefined || typeof this.length !== "number") {
@@ -54,16 +54,16 @@ class Vector {
   get toFloat32Array() {
     return new Float32Array(this.toArray);
   }
-}
+};
 
 /**
  * @todo Documentation.
  * @class
- * @extends Vector
+ * @extends W3DL.Vector
  */
-class Vector2D extends Vector {
+W3DL.Vector2D = class Vector2D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0) {
-    W3DUtils.ValidateArguments([Number, Number], arguments, 0);
+    W3DL.Utils.ValidateArguments([Number, Number], arguments, 0);
     super();
     this.x = x;
     this.y = y;
@@ -74,47 +74,47 @@ class Vector2D extends Vector {
   }
 
   dot(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
     return (this.x * other.x + this.y * other.y);
   }
 
   negative() {
-    return new Vector2D(-this.x, -this.y);
+    return new W3DL.Vector2D(-this.x, -this.y);
   }
 
   add(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector2D(this.x + other.x, this.y + other.y);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector2D(this.x + other.x, this.y + other.y);
   }
 
   subtract(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector2D(this.x - other.x, this.y - other.y);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector2D(this.x - other.x, this.y - other.y);
   }
 
   multiply(multiplier) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector2D(this.x * multiplier, this.y * multiplier);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector2D(this.x * multiplier, this.y * multiplier);
   }
 
   divide(divisor) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector2D(this.x / divisor, this.y / divisor);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector2D(this.x / divisor, this.y / divisor);
   }
 
   get toArray() {
     return [this.x, this.y];
   }
-}
+};
 
 /**
  * @todo Documentation.
  * @class
- * @extends Vector
+ * @extends W3DL.Vector
  */
-class Vector3D extends Vector {
+W3DL.Vector3D = class Vector3D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0) {
-    W3DUtils.ValidateArguments([Number, Number, Number], arguments, 0);
+    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments, 0);
     super();
     this.x = x;
     this.y = y;
@@ -126,52 +126,52 @@ class Vector3D extends Vector {
   }
 
   dot(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
     return (this.x * other.x + this.y * other.y + this.z * other.z);
   }
 
   cross(other) {
-    W3DUtils.ValidateArguments([[Vector3D, Vector4D]], arguments);
-    return new Vector3D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
+    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    return new W3DL.Vector3D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
   }
 
   negative() {
-    return new Vector3D(-this.x, -this.y, -this.z);
+    return new W3DL.Vector3D(-this.x, -this.y, -this.z);
   }
 
   add(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector3D(this.x + other.x, this.y + other.y, this.z + other.z);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector3D(this.x + other.x, this.y + other.y, this.z + other.z);
   }
 
   subtract(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector3D(this.x - other.x, this.y - other.y, this.z - other.z);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector3D(this.x - other.x, this.y - other.y, this.z - other.z);
   }
 
   multiply(multiplier) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector3D(this.x * multiplier, this.y * multiplier, this.z * multiplier);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector3D(this.x * multiplier, this.y * multiplier, this.z * multiplier);
   }
 
   divide(divisor) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector3D(this.x / divisor, this.y / divisor, this.z / divisor);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector3D(this.x / divisor, this.y / divisor, this.z / divisor);
   }
 
   get toArray() {
     return [this.x, this.y, this.z];
   }
-}
+};
 
 /**
  * @todo Documentation.
  * @class
- * @extends Vector
+ * @extends W3DL.Vector
  */
-class Vector4D extends Vector {
+W3DL.Vector4D = class Vector4D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0, w = 1.0) {
-    W3DUtils.ValidateArguments([Number, Number, Number, Number], arguments, 0);
+    W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments, 0);
     super();
     this.x = x;
     this.y = y;
@@ -184,45 +184,45 @@ class Vector4D extends Vector {
   }
 
   dot(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
     return (this.x * other.x + this.y * other.y + this.z * other.z + this.w * other.w);
   }
 
   dot3(other) {
-    W3DUtils.ValidateArguments([[Vector3D, Vector4D]], arguments);
+    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
     return (this.x * other.x + this.y * other.y + this.z * other.z);
   }
 
   cross(other) {
-    W3DUtils.ValidateArguments([[Vector3D, Vector4D]], arguments);
-    return new Vector4D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
+    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    return new W3DL.Vector4D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
   }
 
   negative() {
-    return new Vector4D(-this.x, -this.y, -this.z, -this.w);
+    return new W3DL.Vector4D(-this.x, -this.y, -this.z, -this.w);
   }
 
   add(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector4D(this.x + other.x, this.y + other.y, this.z + other.z, this.w + other.w);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector4D(this.x + other.x, this.y + other.y, this.z + other.z, this.w + other.w);
   }
 
   subtract(other) {
-    W3DUtils.ValidateArguments([this.constructor], arguments);
-    return new Vector4D(this.x - other.x, this.y - other.y, this.z - other.z, this.w - other.w);
+    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    return new W3DL.Vector4D(this.x - other.x, this.y - other.y, this.z - other.z, this.w - other.w);
   }
 
   multiply(multiplier) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector4D(this.x * multiplier, this.y * multiplier, this.z * multiplier, this.w * multiplier);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector4D(this.x * multiplier, this.y * multiplier, this.z * multiplier, this.w * multiplier);
   }
 
   divide(divisor) {
-    W3DUtils.ValidateArguments([Number], arguments);
-    return new Vector4D(this.x / divisor, this.y / divisor, this.z / divisor, this.w / divisor);
+    W3DL.Utils.ValidateArguments([Number], arguments);
+    return new W3DL.Vector4D(this.x / divisor, this.y / divisor, this.z / divisor, this.w / divisor);
   }
 
   get toArray() {
     return [this.x, this.y, this.z, this.w];
   }
-}
+};

@@ -4,14 +4,15 @@
  * @todo Documentation.
  * @file
  * @requires {@link Matrix.js}
+ * @see W3DL.ShaderProgram
  */
 
 /**
  * @todo Documentation.
  * @class
  */
-class ShaderProgram {
+W3DL.ShaderProgram = class ShaderProgram {
   constructor() {
-    
+
   }
-}
+};

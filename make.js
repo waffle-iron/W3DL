@@ -46,6 +46,7 @@ if (build) {
       "--mangle " +
       defines +
       "-- " +
+      "src" + delim + "W3DL.js " + // MUST BE FIRST
       "shaders" + delim + "color-fragment.js " +
       "shaders" + delim + "color-vertex.js " +
       "shaders" + delim + "gouraud-fragment.js " +
@@ -66,7 +67,8 @@ if (build) {
       "src" + delim + "Texture2D.js " +
       "src" + delim + "Material.js " +
       "src" + delim + "Object3D.js " +
-      "src" + delim + "GraphicsObject3D.js ",
+      "src" + delim + "GraphicsObject3D.js " +
+      "src" + delim + "W3DLModule.js ", // MUST BE LAST
       output);
   });
 }

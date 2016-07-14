@@ -4,14 +4,14 @@
  * @todo Documentation.
  * @file
  * @requires {@link Utils.js}
- * @see W3DMath
+ * @see W3DL.Math
  */
 
 /**
  * Common math functions to be used globally.
  * @namespace
  */
-var W3DMath = {
+W3DL.Math = {
   /**
    * Converts an angle represented in degrees to an angle represented in
    * radians.
@@ -19,7 +19,7 @@ var W3DMath = {
    * @returns {Number} An angle represented in radians.
    */
   DegreeToRadian: function(a) {
-    W3DUtils.ValidateArguments([Number], arguments);
+    W3DL.Utils.ValidateArguments([Number], arguments);
     return (a * Math.PI / 180.0);
   },
 
@@ -30,7 +30,7 @@ var W3DMath = {
    * @returns {Number} An angle represented in degrees.
    */
   RadianToDegree: function(a) {
-    W3DUtils.ValidateArguments([Number], arguments);
+    W3DL.Utils.ValidateArguments([Number], arguments);
     return (a * 180.0 / Math.PI);
   },
 
@@ -44,7 +44,7 @@ var W3DMath = {
               <tt>b</tt> at the interpolation ratio <tt>t</tt>.
    */
   Lerp: function(a, b, t) {
-    W3DUtils.ValidateArguments([Number, Number, Number], arguments);
+    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments);
     if (t > 1 || t < 0)
     {
       t -= Math.floor(t);

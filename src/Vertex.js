@@ -5,7 +5,7 @@
  * @file
  * @requires {@link Color.js}
  * @requires {@link Vector.js}
- * @see Vertex
+ * @see W3DL.Vertex
  */
 
 /**
@@ -14,42 +14,42 @@
  * 3D space.
  * @class
  */
-class Vertex {
+W3DL.Vertex = class Vertex {
   /**
-   * @param {Vector} position A vector representing the spacial position of the
+   * @param {W3DL.Vector} position A vector representing the spacial position of the
             vertex.
-   * @param {ColorRGBA} [color=new ColorRGBA()] A color attribute for the
-            vertex.
-   * @param {Vector2D} [texture=new Vector2D()] A vector mapping to
+   * @param {W3DL.ColorRGBA} [color=new W3DL.ColorRGBA()] A color attribute for
+            the vertex.
+   * @param {W3DL.Vector2D} [texture=new W3DL.Vector2D()] A vector mapping to
             coordinates on a 2D texture.
-   * @param {Vector4D} [normal=new Vector4D()] A vector representing the normal
+   * @param {W3DL.Vector4D} [normal=new W3DL.Vector4D()] A vector representing the normal
             to the surface upon which the vertex is found.
    */
-  constructor(position, color = new ColorRGBA(), texture = new Vector2D(), normal = new Vector4D()) {
-    W3DUtils.ValidateArguments([Vector, ColorRGBA, Vector2D, Vector4D], arguments, 1);
+  constructor(position, color = new W3DL.ColorRGBA(), texture = new W3DL.Vector2D(), normal = new W3DL.Vector4D()) {
+    W3DL.Utils.ValidateArguments([W3DL.Vector, W3DL.ColorRGBA, W3DL.Vector2D, W3DL.Vector4D], arguments, 1);
 
     /**
      * A vector representing the spacial position of the vertex.
-     * @type {Vector}
+     * @type {W3DL.Vector}
      */
     this.position = position;
 
     /**
      * A color attribute for the vertex.
-     * @type {ColorRGBA}
+     * @type {W3DL.ColorRGBA}
      */
     this.color = color;
 
     /**
      * A vector mapping to coordinates on a 2D texture.
-     * @type {Vector2D}
+     * @type {W3DL.Vector2D}
      */
     this.texture = texture;
 
     /**
      * A vector representing the normal to the surface upon which the vertex is
      * found.
-     * @type {Vector4D}
+     * @type {W3DL.Vector4D}
      */
     this.normal = normal;
   }
@@ -65,10 +65,10 @@ class Vertex {
   }
 
   /**
-   * Returns Vertex.toArray converted into a Float32Array.
+   * Returns W3DL.Vertex.toArray converted into a Float32Array.
    * @type {Float32Array}
    */
   get toFloat32Array() {
     return new Float32Array(this.toArray);
   }
-}
+};

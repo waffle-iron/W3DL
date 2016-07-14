@@ -5,14 +5,15 @@
  * @file
  * @requires {@link Color.js}
  * @requires {@link Texture2D.js}
+ * @see W3DL.Material
  */
 
 /**
  * @todo Documentation.
  * @class
  */
-class Material {
+W3DL.Material = class Material {
   constructor() {
-    
+
   }
-}
+};
