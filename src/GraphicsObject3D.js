@@ -28,6 +28,7 @@ W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
     W3DL.Utils.ValidateArguments([W3DL.ShaderProgram, W3DL.Material, Boolean, W3DL.IndexedVertexArray, Boolean], arguments, 2);
     if (recursive)
     {
+      /* TODO: This is a hack and should be removed. */
       this.children.forEach(function(child) {
         if (recursiveVAO) {
           ((W3DL.GraphicsObject3D)(child)).initialize(shader, material, recursive, vertexArray, recursiveVAO);

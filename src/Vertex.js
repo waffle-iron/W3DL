@@ -1,7 +1,9 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines a class to represent a vertex, a wrapper for various data
+ * corresponding to a point in space, presumably making up the surface of an
+ * object mesh.
  * @file
  * @requires {@link Color.js}
  * @requires {@link Vector.js}

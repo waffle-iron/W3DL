@@ -1,7 +1,7 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines classes for color objects and common color instances.
  * @file
  * @requires {@link Utils.js}
  * @see W3DL.ColorRGBA

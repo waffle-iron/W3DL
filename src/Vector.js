@@ -1,7 +1,8 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines classes for vectors used for spacial coordinates and
+ * calculations, among other things.
  * @file
  * @requires {@link Utils.js}
  * @see W3DL.Vector

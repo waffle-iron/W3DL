@@ -1,7 +1,8 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines a namespace for common math functions to be used globally
+ * from both within and outside of the W3DL API.
  * @file
  * @requires {@link Utils.js}
  * @see W3DL.Math

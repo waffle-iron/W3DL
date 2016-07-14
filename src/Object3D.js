@@ -1,7 +1,10 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines a class for a base 3D object. A 3D object is represented by
+ * its transformation values such as position, scale, and rotation. A 3D object
+ * also contains a list of children objects and implements basic update and draw
+ * methods to be invoked each update and draw frame.
  * @file
  * @requires {@link Matrix.js}
  * @see W3DL.Object3D

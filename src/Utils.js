@@ -1,7 +1,8 @@
 // jshint esversion: 6
 
 /**
- * @todo Documentation.
+ * This file defines a namespace for common utility functions and objects to be
+ * used globally from both within and outside of the W3DL API.
  * @file
  * @requires {@link W3DL.js}
  * @see W3DL.Utils

@@ -21,6 +21,6 @@ W3DL.IndexedVertexArray = class IndexedVertexArray {
   }
 
   initialize(vertexArray = null, numVertices = 0) {
-    W3DL.Utils.ValidateArguments([W3DL.Vertex, Number], arguments, 0);
+    W3DL.Utils.ValidateArguments([Array, Number], arguments, 0);
   }
 };

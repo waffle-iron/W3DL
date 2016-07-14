@@ -26,7 +26,7 @@ var output = function (error, stdout, stderr) {
 if (process.argv[2] === "clean") {
   rimraf("bin", output);
 } else if (process.argv[2] === "jsdoc") {
-  exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R README.md src", output);
+  exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R JSDOC_README.md src", output);
 } else if (process.argv[2] === "debug") {
   build = true;
   defines += "-d DEBUG=true ";
