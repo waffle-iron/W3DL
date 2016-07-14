@@ -1,3 +1,5 @@
+#!/usr/bin/node
+
 var exec = require("child_process").exec;
 var fs = require("fs");
 var os = require("os");
@@ -35,7 +37,7 @@ if (process.argv[2] === "clean") {
 }
 
 if (build) {
-  fs.access("bin", fs.F_OK, function(err) {
+  fs.stat("bin", function(err) {
     if (err) {
       fs.mkdirSync("bin");
     }
