@@ -33,8 +33,12 @@ args.forEach(function(arg) {
   } else if (a === "debug") {
     defines += "-d DEBUG=true ";
   } else {
-    if (!allSelected) {
-      buildTypes.push(a);
+    if (availableBuildTypes.array.indexOf(a) === -1) {
+      console.error("Invalid argument: " + a + ".");
+    } else if (!allSelected) {
+      if (buildTypes.indexOf(a) === -1) {
+        buildTypes.push(a);
+      }
     }
   }
 });
@@ -104,7 +108,7 @@ buildTypes.forEach(function(buildType) {
       exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R JSDOC_README.md src", buildCallback(currentBuild, clean));
     }
   } else {
-    console.error("Invalid build type: " + buildType + ".");
+    console.error("Invalid build target attempt: " + buildType + ".");
     return;
   }
 });
