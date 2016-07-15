@@ -10,12 +10,12 @@ var rimraf = require("rimraf");
 var args = process.argv.slice(2);
 var delim = (os.type() === "Windows_NT" ? "\\" : "/");
 
-var build_types = [];
-var all_selected = false;
+var buildTypes = [];
+var allSelected = false;
 var clean = false;
 var defines = "";
 
-var available_build_types = {
+var availableBuildTypes = {
   array: ["w3dl", "jsdoc"],
   w3dl:  function() { return this.array[0]; },
   jsdoc: function() { return this.array[1]; }
@@ -25,42 +25,40 @@ var available_build_types = {
 args.forEach(function(arg) {
   var a = arg.toLowerCase();
   if (a === "all") {
-    build_types = [];
-    build_types = build_types.concat(available_build_types.array);
-    all_selected = true;
+    buildTypes = [];
+    buildTypes = buildTypes.concat(availableBuildTypes.array);
+    allSelected = true;
   } else if (a === "clean") {
     clean = true;
   } else if (a === "debug") {
     defines += "-d DEBUG=true ";
   } else {
-    if (!all_selected) {
-      build_types.push(a);
+    if (!allSelected) {
+      buildTypes.push(a);
     }
   }
 });
 
-if (build_types.length < 1) {
-  build_types.push(available_build_types.w3dl());
+if (buildTypes.length < 1) {
+  buildTypes.push(availableBuildTypes.w3dl());
 }
 
-var cleanCallback = function(err) {
-  if (err) {
-    console.error("Failed to clean due to error: " + err);
-  }
+var buildCallback = function(buildType, isClean) {
+  return function(err) {
+    if (err) {
+      console.error("Failed to " + (isClean ? "clean " : "build ") + buildType + " due to error: " + err);
+    } else {
+      console.log("Completed " + (isClean ? "clean." : "build."));
+    }
+  };
 };
 
-var buildCallback = function(err) {
-  if (err) {
-    console.error("Failed to build due to error: " + err);
-  }
-};
-
-build_types.forEach(function(build_type) {
-  var current_build = build_type.toUpperCase();
-  console.log((clean ? "Cleaning " : "Building ") + current_build + "...");
-  if (build_type === available_build_types.w3dl()) {
+buildTypes.forEach(function(buildType) {
+  var currentBuild = buildType.toUpperCase();
+  console.log((clean ? "Cleaning " : "Building ") + currentBuild + "...");
+  if (buildType === availableBuildTypes.w3dl()) {
     if (clean) {
-      rimraf("bin", cleanCallback);
+      rimraf("bin", buildCallback(currentBuild, clean));
     } else {
       fs.stat("bin", function(err) {
         if (err) {
@@ -96,18 +94,17 @@ build_types.forEach(function(build_type) {
           "src" + delim + "Object3D.js " +
           "src" + delim + "GraphicsObject3D.js " +
           "src" + delim + "W3DLModule.js ", // MUST BE LAST
-          buildCallback);
+          buildCallback(currentBuild, clean));
       });
     }
-  } else if (build_type === available_build_types.jsdoc()) {
+  } else if (buildType === availableBuildTypes.jsdoc()) {
     if (clean) {
-      rimraf("W3DDOC", cleanCallback);
+      rimraf("W3DDOC", buildCallback(currentBuild, clean));
     } else {
-      exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R JSDOC_README.md src", buildCallback);
+      exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R JSDOC_README.md src", buildCallback(currentBuild, clean));
     }
   } else {
-    console.error("Invalid build type: " + build_type + ".");
+    console.error("Invalid build type: " + buildType + ".");
     return;
   }
-  console.log("Complete.");
 });
