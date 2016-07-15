@@ -48,7 +48,7 @@ var buildCallback = function(buildType, isClean) {
     if (err) {
       console.error("Failed to " + (isClean ? "clean " : "build ") + buildType + " due to error: " + err);
     } else {
-      console.log("Completed " + (isClean ? "clean." : "build."));
+      console.log("Completed " + buildType + (isClean ? "clean." : "build."));
     }
   };
 };
