@@ -17,7 +17,7 @@
  */
 W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
   constructor(vertexArray = null, position = new W3DL.Vector3D(), scale = new W3DL.Vector3D(1, 1, 1), rotation = new W3DL.Vector3D()) {
-    W3DL.Utils.ValidateArguments([W3DL.IndexedVertexArray, W3DL.Vector3D, W3DL.Vector3D, W3DL.Vector3D], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.IndexedVertexArray, W3DL.Vector3D, W3DL.Vector3D, W3DL.Vector3D], arguments, 0); // jshint ignore:line
     super(position, scale, rotation);
     this.vertices = vertexArray;
     this.shaderProgram = null;
@@ -25,7 +25,7 @@ W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
   }
 
   initialize(shader, material, recursive = false, vertexArray = null, recursiveVAO = false) {
-    W3DL.Utils.ValidateArguments([W3DL.ShaderProgram, W3DL.Material, Boolean, W3DL.IndexedVertexArray, Boolean], arguments, 2);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.ShaderProgram, W3DL.Material, Boolean, W3DL.IndexedVertexArray, Boolean], arguments, 2); // jshint ignore:line
     if (recursive)
     {
       /* TODO: This is a hack and should be removed. */
@@ -43,7 +43,7 @@ W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
   }
 
   draw(parentTransformation = W3DL.Matrix4.IdentityMatrix()) {
-    W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments, 0); // jshint ignore:line
     super.draw(parentTransformation);
     if (this.shaderProgram) {
       /** @todo draw implementation */
@@ -51,7 +51,7 @@ W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
   }
 
   setInheritedShader(shader) {
-    W3DL.Utils.ValidateArguments([W3DL.ShaderProgram], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.ShaderProgram], arguments); // jshint ignore:line
     this.children.forEach(function(child) {
       ((W3DL.GraphicsObject3D)(child)).setInheritedShader(shader);
     });
@@ -59,7 +59,7 @@ W3DL.GraphicsObject3D = class GraphicsObject3D extends W3DL.Object3D {
   }
 
   setInheritedMaterial(material) {
-    W3DL.Utils.ValidateArguments([W3DL.Material], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Material], arguments); // jshint ignore:line
     this.children.forEach(function(child) {
       ((W3DL.GraphicsObject3D)(child)).setInheritedMaterial(material);
     });

@@ -7,4 +7,6 @@
  * @requires {@link W3DL.js}
  */
 
-module.exports = W3DL;
+if (NODE_MODULE) {
+  module.exports = W3DL;
+}

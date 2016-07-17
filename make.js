@@ -1,19 +1,36 @@
 #!/usr/bin/node
 
 // Required node modules
-var exec = require("child_process").exec;
+var exec = require("child_process").execSync;
 var fs = require("fs");
 var os = require("os");
-var rimraf = require("rimraf");
+var path = require("path");
+var rimraf = require("rimraf").sync;
+var uglifyjs = require("uglify-js-harmony");
 
 // Variables
 var args = process.argv.slice(2);
 var delim = (os.type() === "Windows_NT" ? "\\" : "/");
 
+var projRootDir = process.cwd();
+var projBinDir = path.join(projRootDir, "bin");
+var projDocDir = path.join(projRootDir, "W3DDOC");
+var projShaderDir = path.join(projRootDir, "shaders");
+var projSrcDir = path.join(projRootDir, "src");
+var projTmpDir = path.join(projRootDir, ".tmp");
+var outFileMin = "w3dl.min.js";
+var outFileMap = "w3dl.min.js.map";
+
 var buildTypes = [];
 var allSelected = false;
 var clean = false;
-var defines = "";
+var defineStrings = {
+  debug: "const DEBUG = false\n",
+  nodeModule: "const NODE_MODULE = false\n",
+  toString: function() {
+    return this.debug + this.nodeModule;
+  }
+};
 
 var availableBuildTypes = {
   array: ["w3dl", "jsdoc"],
@@ -31,7 +48,9 @@ args.forEach(function(arg) {
   } else if (a === "clean") {
     clean = true;
   } else if (a === "debug") {
-    defines += "-d DEBUG=true ";
+    defineStrings.debug = "const DEBUG = true\n";
+  } else if (a === "module") {
+    defineStrings.nodeModule = "const NODE_MODULE = true\n";
   } else {
     if (availableBuildTypes.array.indexOf(a) === -1) {
       console.error("Invalid argument: " + a + ".");
@@ -47,68 +66,100 @@ if (buildTypes.length < 1) {
   buildTypes.push(availableBuildTypes.w3dl());
 }
 
-var buildCallback = function(buildType, isClean) {
-  return function(err) {
-    if (err) {
-      console.error("Failed to " + (isClean ? "clean " : "build ") + buildType + " due to error: " + err);
-    } else {
-      console.log("Completed " + buildType + (isClean ? " clean." : " build."));
-    }
-  };
-};
+rimraf(projTmpDir);
 
 buildTypes.forEach(function(buildType) {
   var currentBuild = buildType.toUpperCase();
   console.log((clean ? "Cleaning " : "Building ") + currentBuild + "...");
+  fs.mkdirSync(projTmpDir);
   if (buildType === availableBuildTypes.w3dl()) {
     if (clean) {
-      rimraf("bin", buildCallback(currentBuild, clean));
+      try {
+        rimraf(projBinDir);
+      } catch (err) {
+        console.error("Failed to remove bin directory. " + err);
+      }
     } else {
-      fs.stat("bin", function(err) {
-        if (err) {
-          fs.mkdirSync("bin");
+      try {
+        fs.statSync(projBinDir);
+      } catch (err) {
+        fs.mkdirSync("bin");
+      }
+      try {
+        fs.writeFileSync(path.join(projTmpDir, "Defines.js"), defineStrings.toString());
+      } catch (err) {
+        console.error("Failed to write to temporary Defines file. " + err);
+      }
+      var uglifyResult = uglifyjs.minify(
+        [
+          path.join(projSrcDir, "W3DL.js"), // MUST BE FIRST
+          path.join(projTmpDir, "Defines.js"),
+          path.join(projShaderDir, "color-fragment.js"),
+          path.join(projShaderDir, "color-vertex.js"),
+          path.join(projShaderDir, "gouraud-fragment.js"),
+          path.join(projShaderDir, "gouraud-vertex.js"),
+          path.join(projShaderDir, "phong-fragment.js"),
+          path.join(projShaderDir, "phong-vertex.js"),
+          path.join(projShaderDir, "texture-fragment.js"),
+          path.join(projShaderDir, "texture-vertex.js"),
+          path.join(projShaderDir, "white-vertex.js"),
+          path.join(projSrcDir, "Utils.js"),
+          path.join(projSrcDir, "Math.js"),
+          path.join(projSrcDir, "Color.js"),
+          path.join(projSrcDir, "Vector.js"),
+          path.join(projSrcDir, "Matrix.js"),
+          path.join(projSrcDir, "Vertex.js"),
+          path.join(projSrcDir, "IndexedVertexArray.js"),
+          path.join(projSrcDir, "ShaderProgram.js"),
+          path.join(projSrcDir, "Texture2D.js"),
+          path.join(projSrcDir, "Material.js"),
+          path.join(projSrcDir, "Object3D.js"),
+          path.join(projSrcDir, "GraphicsObject3D.js"),
+          path.join(projSrcDir, "W3DLModule.js") // MUST BE LAST
+        ],
+        {
+          outSourceMap: "w3dl.min.js.map",
+          sourceRoot: "file:///",
+          compress: {
+            dead_code: true,
+            unused: true
+          },
+          mangle: true,
+          warnings: true
         }
-        exec("node_modules" + delim + ".bin" + delim + "uglifyjs " +
-          "-o bin" + delim + "w3dl.min.js " +
-          //"--source-map bin" + delim + "w3dl.min.js.map " +
-          "--compress " +
-          "--mangle " +
-          defines +
-          "-- " +
-          "src" + delim + "W3DL.js " + // MUST BE FIRST
-          "shaders" + delim + "color-fragment.js " +
-          "shaders" + delim + "color-vertex.js " +
-          "shaders" + delim + "gouraud-fragment.js " +
-          "shaders" + delim + "gouraud-vertex.js " +
-          "shaders" + delim + "phong-fragment.js " +
-          "shaders" + delim + "phong-vertex.js " +
-          "shaders" + delim + "texture-fragment.js " +
-          "shaders" + delim + "texture-vertex.js " +
-          "shaders" + delim + "white-vertex.js " +
-          "src" + delim + "Utils.js " +
-          "src" + delim + "Math.js " +
-          "src" + delim + "Color.js " +
-          "src" + delim + "Vector.js " +
-          "src" + delim + "Matrix.js " +
-          "src" + delim + "Vertex.js " +
-          "src" + delim + "IndexedVertexArray.js " +
-          "src" + delim + "ShaderProgram.js " +
-          "src" + delim + "Texture2D.js " +
-          "src" + delim + "Material.js " +
-          "src" + delim + "Object3D.js " +
-          "src" + delim + "GraphicsObject3D.js " +
-          "src" + delim + "W3DLModule.js ", // MUST BE LAST
-          buildCallback(currentBuild, clean));
-      });
+      );
+      try {
+        fs.writeFileSync(path.join(projBinDir, outFileMin), uglifyResult.code);
+      } catch (err) {
+        console.error("Failed to save " + outFileMin + ". " + err);
+      }
+      try {
+        fs.writeFileSync(path.join(projBinDir, outFileMap), uglifyResult.map);
+      } catch (err) {
+        console.error("Failed to save " + outFileMap + ". " + err);
+      }
     }
   } else if (buildType === availableBuildTypes.jsdoc()) {
     if (clean) {
-      rimraf("W3DDOC", buildCallback(currentBuild, clean));
+      try {
+        rimraf(projDocDir);
+      } catch (err) {
+        console.error("Failed to remove jsdoc directory. " + err);
+      }
     } else {
-      exec("node_modules" + delim + ".bin" + delim + "jsdoc -r -d W3DDOC -R JSDOC_README.md src", buildCallback(currentBuild, clean));
+      try {
+        exec(path.join("node_modules", ".bin", "jsdoc") + " -r -d W3DDOC -R JSDOC_README.md src");
+      } catch (err) {
+        console.error("Failed to build jsdocs. " + err);
+      }
     }
   } else {
     console.error("Invalid build target attempt: " + buildType + ".");
     return;
+  }
+  try {
+    rimraf(projTmpDir);
+  } catch (err) {
+    console.error("Failed to remove temporary build directory. " + err);
   }
 });

@@ -25,7 +25,7 @@ W3DL.ColorRGBA = class ColorRGBA {
             color's transparency.
    */
   constructor(red = 0.0, green = 0.0, blue = 0.0, alpha = 1.0) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments, 0); // jshint ignore:line
 
     /**
      * A quantity from 0.0 to 1.0 for the color's red channel.
@@ -78,7 +78,7 @@ W3DL.ColorRGBA = class ColorRGBA {
 W3DL.Colors = class Colors {
   constructor() {
     if (new.target === W3DL.Colors) {
-      throw new TypeError("Cannot construct instances of abstract class: " + new.target);
+      throw new TypeError("Cannot construct instances of abstract class: " + new.target.name);
     }
   }
 

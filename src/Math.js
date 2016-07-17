@@ -20,7 +20,7 @@ W3DL.Math = {
    * @returns {Number} An angle represented in radians.
    */
   DegreeToRadian: function(a) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return (a * Math.PI / 180.0);
   },
 
@@ -31,7 +31,7 @@ W3DL.Math = {
    * @returns {Number} An angle represented in degrees.
    */
   RadianToDegree: function(a) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return (a * 180.0 / Math.PI);
   },
 
@@ -45,7 +45,7 @@ W3DL.Math = {
               <tt>b</tt> at the interpolation ratio <tt>t</tt>.
    */
   Lerp: function(a, b, t) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number], arguments); // jshint ignore:line
     if (t > 1 || t < 0)
     {
       t -= Math.floor(t);

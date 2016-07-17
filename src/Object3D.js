@@ -16,7 +16,7 @@
  */
 W3DL.Object3D = class Object3D {
   constructor(initialPosition = new W3DL.Vector3D(), initialScale = new W3DL.Vector3D(1, 1, 1), initialRotation = new W3DL.Vector3D()) {
-    W3DL.Utils.ValidateArguments([W3DL.Vector3D, W3DL.Vector3D, W3DL.Vector3D], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Vector3D, W3DL.Vector3D, W3DL.Vector3D], arguments, 0); // jshint ignore:line
     this.position = initialPosition;
     this.scale = initialScale;
     this.rotation = initialRotation;
@@ -25,14 +25,14 @@ W3DL.Object3D = class Object3D {
   }
 
   update(deltaTime) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     this.children.forEach(function(child) {
       child.update(deltaTime);
     });
   }
 
   draw(parentTransformation = W3DL.Matrix4.IdentityMatrix()) {
-    W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments, 0); // jshint ignore:line
     // Scale is not passed onto children
     this.transformation = parentTransformation.multiply(W3DL.Matrix4.TranslationMatrix(this.position.x, this.position.y, this.position.z)).
       multiply(W3DL.Matrix4.RollPitchYawRotationMatrix(this.rotation.z, this.rotation.x, this.rotation.y));
@@ -45,14 +45,14 @@ W3DL.Object3D = class Object3D {
   }
 
   rotate(x, y, z, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3); // jshint ignore:line
     this.rotation.x += (!isDegree ? W3DL.Math.RadianToDegree(x) : x);
     this.rotation.y += (!isDegree ? W3DL.Math.RadianToDegree(y) : y);
     this.rotation.z += (!isDegree ? W3DL.Math.RadianToDegree(z) : z);
   }
 
   scale(x, y, z, recursive = false) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3); // jshint ignore:line
     if (recursive) {
       this.children.forEach(function(child) {
         child.scale(x, y, z, recursive);
@@ -64,34 +64,34 @@ W3DL.Object3D = class Object3D {
   }
 
   translate(x, y, z) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number], arguments); // jshint ignore:line
     this.position.x += x;
     this.position.y += y;
     this.position.z += z;
   }
 
   pitch(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     this.rotation.x += (!isDegree ? W3DL.Math.RadianToDegree(angle) : angle);
   }
 
   yaw(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     this.rotation.y += (!isDegree ? W3DL.Math.RadianToDegree(angle) : angle);
   }
 
   roll(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     this.rotation.z += (!isDegree ? W3DL.Math.RadianToDegree(angle) : angle);
   }
 
   addChild(child) {
-    W3DL.Utils.ValidateArguments([W3DL.Object3D], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Object3D], arguments); // jshint ignore:line
     this.children.push(child);
   }
 
   removeChild(child) {
-    W3DL.Utils.ValidateArguments([W3DL.Object3D], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Object3D], arguments); // jshint ignore:line
     var index = this.children.indexOf(child);
     if (index > -1) {
       this.children.splice(index, 1);

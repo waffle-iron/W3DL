@@ -28,7 +28,7 @@ W3DL.Vertex = class Vertex {
             to the surface upon which the vertex is found.
    */
   constructor(position, color = new W3DL.ColorRGBA(), texture = new W3DL.Vector2D(), normal = new W3DL.Vector4D()) {
-    W3DL.Utils.ValidateArguments([W3DL.Vector, W3DL.ColorRGBA, W3DL.Vector2D, W3DL.Vector4D], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Vector, W3DL.ColorRGBA, W3DL.Vector2D, W3DL.Vector4D], arguments, 1); // jshint ignore:line
 
     /**
      * A vector representing the spacial position of the vertex.

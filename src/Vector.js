@@ -19,7 +19,7 @@
 W3DL.Vector = class Vector {
   constructor() {
     if (new.target === W3DL.Vector) {
-      throw new TypeError("Cannot construct instances of abstract class: " + new.target);
+      throw new TypeError("Cannot construct instances of abstract class: " + new.target.name);
     }
     if (this.length === undefined || typeof this.length !== "number") {
       throw new TypeError("Override required for method: length");
@@ -64,7 +64,7 @@ W3DL.Vector = class Vector {
  */
 W3DL.Vector2D = class Vector2D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0) {
-    W3DL.Utils.ValidateArguments([Number, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number], arguments, 0); // jshint ignore:line
     super();
     this.x = x;
     this.y = y;
@@ -75,7 +75,7 @@ W3DL.Vector2D = class Vector2D extends W3DL.Vector {
   }
 
   dot(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return (this.x * other.x + this.y * other.y);
   }
 
@@ -84,22 +84,22 @@ W3DL.Vector2D = class Vector2D extends W3DL.Vector {
   }
 
   add(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector2D(this.x + other.x, this.y + other.y);
   }
 
   subtract(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector2D(this.x - other.x, this.y - other.y);
   }
 
   multiply(multiplier) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector2D(this.x * multiplier, this.y * multiplier);
   }
 
   divide(divisor) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector2D(this.x / divisor, this.y / divisor);
   }
 
@@ -115,7 +115,7 @@ W3DL.Vector2D = class Vector2D extends W3DL.Vector {
  */
 W3DL.Vector3D = class Vector3D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number], arguments, 0); // jshint ignore:line
     super();
     this.x = x;
     this.y = y;
@@ -127,12 +127,12 @@ W3DL.Vector3D = class Vector3D extends W3DL.Vector {
   }
 
   dot(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return (this.x * other.x + this.y * other.y + this.z * other.z);
   }
 
   cross(other) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments); // jshint ignore:line
     return new W3DL.Vector3D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
   }
 
@@ -141,22 +141,22 @@ W3DL.Vector3D = class Vector3D extends W3DL.Vector {
   }
 
   add(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector3D(this.x + other.x, this.y + other.y, this.z + other.z);
   }
 
   subtract(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector3D(this.x - other.x, this.y - other.y, this.z - other.z);
   }
 
   multiply(multiplier) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector3D(this.x * multiplier, this.y * multiplier, this.z * multiplier);
   }
 
   divide(divisor) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector3D(this.x / divisor, this.y / divisor, this.z / divisor);
   }
 
@@ -172,7 +172,7 @@ W3DL.Vector3D = class Vector3D extends W3DL.Vector {
  */
 W3DL.Vector4D = class Vector4D extends W3DL.Vector {
   constructor(x = 0.0, y = 0.0, z = 0.0, w = 1.0) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments, 0); // jshint ignore:line
     super();
     this.x = x;
     this.y = y;
@@ -185,17 +185,17 @@ W3DL.Vector4D = class Vector4D extends W3DL.Vector {
   }
 
   dot(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return (this.x * other.x + this.y * other.y + this.z * other.z + this.w * other.w);
   }
 
   dot3(other) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments); // jshint ignore:line
     return (this.x * other.x + this.y * other.y + this.z * other.z);
   }
 
   cross(other) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments); // jshint ignore:line
     return new W3DL.Vector4D((this.y * other.z - this.z * other.y), -(this.x * other.z - this.z * other.x), (this.x * other.y - this.y * other.x));
   }
 
@@ -204,22 +204,22 @@ W3DL.Vector4D = class Vector4D extends W3DL.Vector {
   }
 
   add(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector4D(this.x + other.x, this.y + other.y, this.z + other.z, this.w + other.w);
   }
 
   subtract(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     return new W3DL.Vector4D(this.x - other.x, this.y - other.y, this.z - other.z, this.w - other.w);
   }
 
   multiply(multiplier) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector4D(this.x * multiplier, this.y * multiplier, this.z * multiplier, this.w * multiplier);
   }
 
   divide(divisor) {
-    W3DL.Utils.ValidateArguments([Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number], arguments); // jshint ignore:line
     return new W3DL.Vector4D(this.x / divisor, this.y / divisor, this.z / divisor, this.w / divisor);
   }
 

@@ -17,7 +17,7 @@
 W3DL.Matrix = class Matrix {
   constructor() {
     if (new.target === W3DL.Matrix) {
-      throw new TypeError("Cannot construct instances of abstract class: " + new.target);
+      throw new TypeError("Cannot construct instances of abstract class: " + new.target.name);
     }
     if (this.matrixMultiply === undefined || typeof this.matrixMultiply !== "function") {
       throw new TypeError("Override required for method: matrixMultiply");
@@ -72,7 +72,7 @@ W3DL.Matrix = class Matrix {
   }
 
   add(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     var matrix = new this.constructor();
     for (var i = 0; i < matrix.entries.length; i++) {
       for (var j = 0; j < matrix.entries[i].length; j++) {
@@ -83,7 +83,7 @@ W3DL.Matrix = class Matrix {
   }
 
   subtract(other) {
-    W3DL.Utils.ValidateArguments([this.constructor], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([this.constructor], arguments); // jshint ignore:line
     var matrix = new this.constructor();
     for (var i = 0; i < matrix.entries.length; i++) {
       for (var j = 0; j < matrix.entries[i].length; j++) {
@@ -94,7 +94,7 @@ W3DL.Matrix = class Matrix {
   }
 
   multiply(multiplier) {
-    W3DL.Utils.ValidateArguments([[Number, W3DL.Matrix, W3DL.Vector]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[Number, W3DL.Matrix, W3DL.Vector]], arguments); // jshint ignore:line
     var product = null;
     if (new multiplier.constructor() instanceof Number) {
       product = new this.constructor();
@@ -130,7 +130,7 @@ W3DL.Matrix = class Matrix {
  */
 W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   constructor(vector1 = new W3DL.Vector4D(0, 0, 0, 0), vector2 = new W3DL.Vector4D(0, 0, 0, 0), vector3 = new W3DL.Vector4D(0, 0, 0, 0), vector4 = new W3DL.Vector4D(0, 0, 0, 0)) {
-    W3DL.Utils.ValidateArguments([W3DL.Vector4D, W3DL.Vector4D, W3DL.Vector4D, W3DL.Vector4D], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Vector4D, W3DL.Vector4D, W3DL.Vector4D, W3DL.Vector4D], arguments, 0); // jshint ignore:line
     super();
     this.entries = [vector1.toArray, vector2.toArray, vector3.toArray, vector4.toArray];
   }
@@ -144,7 +144,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   where a = angle.
   */
   static RotationAboutXMatrix(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     var a = (isDegree ? W3DL.Math.DegreeToRadian(angle) : angle);
 
     var matrix = W3DL.Matrix4.IdentityMatrix();
@@ -163,7 +163,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   where a = angle.
   */
   static RotationAboutYMatrix(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     var a = (isDegree ? W3DL.Math.DegreeToRadian(angle) : angle);
 
     var matrix = W3DL.Matrix4.IdentityMatrix();
@@ -182,7 +182,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   where a = angle.
   */
   static RotationAboutZMatrix(angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Boolean], arguments, 1); // jshint ignore:line
     var a = (isDegree ? W3DL.Math.DegreeToRadian(angle) : angle);
 
     var matrix = W3DL.Matrix4.IdentityMatrix();
@@ -193,14 +193,14 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   }
 
   static RollPitchYawRotationMatrix(roll, pitch, yaw, isDegree = true) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Boolean], arguments, 3); // jshint ignore:line
     return (this.RotationAboutYMatrix(yaw, isDegree).matrixMultiply(
       this.RotationAboutXMatrix(pitch, isDegree)).matrixMultiply(
         this.RotationAboutZMatrix(roll, isDegree)));
   }
 
   static RotationAboutVectorAxisMatrix(vector, angle, isDegree = true) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D], Number, Boolean], arguments, 2);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D], Number, Boolean], arguments, 2); // jshint ignore:line
     var a = (isDegree ? W3DL.Math.DegreeToRadian(angle) : angle);
     var v = vector.normalized();
 
@@ -217,22 +217,22 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   }
 
   static ScaleMatrix(x, y, z) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number], arguments); // jshint ignore:line
     return new W3DL.Matrix4(new W3DL.Vector4D(x, 0, 0, 0), new W3DL.Vector4D(0, y, 0, 0), new W3DL.Vector4D(0, 0, z, 0), new W3DL.Vector4D());
   }
 
   static TranslationMatrix(x, y, z) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number], arguments); // jshint ignore:line
     return new W3DL.Matrix4(new W3DL.Vector4D(1, 0, 0, x), new W3DL.Vector4D(0, 1, 0, y), new W3DL.Vector4D(0, 0, 1, z), new W3DL.Vector4D());
   }
 
   static TranslationFromVectorMatrix(vector) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D]], arguments); // jshint ignore:line
     return W3DL.Matrix4.TranslationMatrix(vector.x, vector.y, vector.z);
   }
 
   static CameraMatrix(position, lookAt, upVector) {
-    W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D], [W3DL.Vector3D, W3DL.Vector4D], [W3DL.Vector3D, W3DL.Vector4D]], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([[W3DL.Vector3D, W3DL.Vector4D], [W3DL.Vector3D, W3DL.Vector4D], [W3DL.Vector3D, W3DL.Vector4D]], arguments); // jshint ignore:line
     var pos = (position instanceof W3DL.Vector3D ? position : new W3DL.Vector3D(position.x, position.y, position.z));
     var look = (lookAt instanceof W3DL.Vector3D ? lookAt : new W3DL.Vector3D(lookAt.x, lookAt.y, lookAt.z));
     var up = (upVector instanceof W3DL.Vector3D ? upVector : new W3DL.Vector3D(upVector.x, upVector.y, upVector.z));
@@ -249,12 +249,12 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   }
 
   static FrustrumProjetionMatrix(xMin, yMin, xMax, yMax, nearPlane, farPlane) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Number, Number, Number], arguments); // jshint ignore:line
     throw new Error("Unimplemented.");
   }
 
   static SymmetricPerspectiveProjectionMatrix(fieldOfView, aspectRatio, nearPlane, farPlane) {
-    W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([Number, Number, Number, Number], arguments); // jshint ignore:line
     var matrix = W3DL.Matrix4.IdentityMatrix();
     var cot = 1 / Math.tan(W3DL.Math.DegreeToRadian(fieldOfView / 2));
     matrix.entries[0][0] = cot / aspectRatio;
@@ -267,7 +267,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   }
 
   matrixMultiply(other) {
-    W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Matrix4], arguments); // jshint ignore:line
     var matrix = new W3DL.Matrix4();
     var otherMatrix = other.transposed();
     for (var i = 0; i < 4; i++) {
@@ -281,7 +281,7 @@ W3DL.Matrix4 = class Matrix4 extends W3DL.Matrix {
   }
 
   vectorMultiply(vector) {
-    W3DL.Utils.ValidateArguments([W3DL.Vector4D], arguments);
+    DEBUG && W3DL.Utils.ValidateArguments([W3DL.Vector4D], arguments); // jshint ignore:line
     var rows = [
       new W3DL.Vector4D(this.entries[0][0], this.entries[0][1], this.entries[0][2], this.entries[0][3]),
       new W3DL.Vector4D(this.entries[1][0], this.entries[1][1], this.entries[1][2], this.entries[1][3]),

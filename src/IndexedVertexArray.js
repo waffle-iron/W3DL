@@ -13,7 +13,7 @@
  */
 W3DL.IndexedVertexArray = class IndexedVertexArray {
   constructor(vertexArray = null, numVertices = 0) {
-    W3DL.Utils.ValidateArguments([Array, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Array, Number], arguments, 0); // jshint ignore:line
     this.vertices = vertexArray;
     this.vertexCount = numVertices;
     this.vao = 0;
@@ -21,6 +21,6 @@ W3DL.IndexedVertexArray = class IndexedVertexArray {
   }
 
   initialize(vertexArray = null, numVertices = 0) {
-    W3DL.Utils.ValidateArguments([Array, Number], arguments, 0);
+    DEBUG && W3DL.Utils.ValidateArguments([Array, Number], arguments, 0); // jshint ignore:line
   }
 };
