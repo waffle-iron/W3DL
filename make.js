@@ -1,8 +1,8 @@
 #!/usr/bin/node
 
 // Required node modules
-var exec = require("child_process").execSync;
 var fs = require("fs");
+var jsdoc = require("jsdoc-api");
 var os = require("os");
 var path = require("path");
 var rimraf = require("rimraf").sync;
@@ -148,7 +148,14 @@ buildTypes.forEach(function(buildType) {
       }
     } else {
       try {
-        exec(path.join("node_modules", ".bin", "jsdoc") + " -r -d W3DDOC -R JSDOC_README.md src");
+        jsdoc.renderSync(
+          {
+            destination: projDocDir,
+            files: projSrcDir,
+            recurse: true,
+            readme: path.join(projRootDir, "JSDOC_README.md")
+          }
+        );
       } catch (err) {
         console.error("Failed to build jsdocs. " + err);
       }
